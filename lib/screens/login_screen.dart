@@ -42,6 +42,17 @@ class LoginScreenState extends State<LoginScreen>{
                   textAlign: TextAlign.center,
                 ),
 
+                const SizedBox(height: 8.0),
+
+                Text(
+                  'Please login to your account',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+
+                  ),
+                )
+
               ],
             )
           )
