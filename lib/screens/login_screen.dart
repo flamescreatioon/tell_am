@@ -123,7 +123,17 @@ class LoginScreenState extends State<LoginScreen> {
                             )
                           ],
                         ))
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            
+                          ]
+                        )
                       ],
-                    )))));
+                    )
+                    )
+                    )
+                    )
+                    );
   }
 }
