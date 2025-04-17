@@ -11,7 +11,7 @@ class LoginScreenState extends State<LoginScreen>{
 
   @override
   Widget build(BuildContext context){
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Center (
           child: Padding(
@@ -47,10 +47,42 @@ class LoginScreenState extends State<LoginScreen>{
                 Text(
                   'Please login to your account',
                   style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black,
-
+                    fontSize: 14,
+                    color: Colors.grey,
                   ),
+                  textAlign: TextAlign.center,
+                ),
+
+                const SizedBox(height: 24.0),
+
+                Form(
+                   child: Column(
+                    children: [
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'Enter your email',
+                          prefixIcon: Icon(Icons.email),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical: 16.0,
+                            horizontal: 16.0,
+                          )
+                        ),
+                      ),
+
+                      TextFormField(
+                        obscureText: true,
+                        decoration: TextInputType(
+                          labelText: 'Password',
+                          hintText: 
+                        )                     
+                        )
+                    ],
+                   )
                 )
 
               ],
