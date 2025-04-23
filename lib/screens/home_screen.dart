@@ -217,7 +217,44 @@ Widget build(BuildContext context){
       ],
     ),
 
-    body
+    body: SafeArea(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          await Future.delayed(const Duration(seconds: 2));
+        }, child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search for food, restaurants...',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.filter_list),
+                      onPressed: (){
+
+                      },
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0)
+                  ),
+                  ),
+                ),
+              
+            ],
+          ),
+        ),
+      ),
+      )
   );
 }
 }
