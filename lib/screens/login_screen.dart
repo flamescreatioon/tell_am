@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tell_am/screens/home_screen.dart';
 import 'package:tell_am/screens/register_screen.dart';
 import 'package:tell_am/components/button_01.dart';
 
@@ -105,7 +106,12 @@ class LoginScreenState extends State<LoginScreen> {
                             const SizedBox(height: 16.0),
 
                             ElevatedButton(
-                              onPressed: () => (),
+                              onPressed: () => (
+                                Navigator.push(
+                                  context, 
+                                  MaterialPageRoute(builder: (context) => HomeScreen())
+                                )
+                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orange,
                                 foregroundColor: Colors.white,

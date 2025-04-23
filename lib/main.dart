@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(), // Your app's home screen
+      home: const LoginScreen(), // Your app's home screen
     );
   }
 }
