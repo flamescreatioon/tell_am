@@ -1,0 +1,184 @@
+lib/
+├── main.dart                      # App entry point
+├── core/                          # Core utilities shared across the app
+│   ├── constants/                 # App-wide constants (colors, text styles)
+│   ├── services/                  # API, local storage, notification services
+│   ├── utils/                     # Helpers, formatters
+│   └── theme/                     # App theming (light/dark, text styles)
+│
+├── models/                        # Data models
+│   ├── user_model.dart
+│   ├── food_item_model.dart
+│   ├── buka_model.dart
+│   └── order_model.dart
+│
+├── providers/                     # State management (Riverpod / Provider / Bloc)
+│   ├── auth_provider.dart
+│   ├── cart_provider.dart
+│   ├── food_provider.dart
+│   └── order_provider.dart
+│
+├── screens/                       # Pages / Screens
+│   ├── auth/
+│   │   ├── login_screen.dart
+│   │   └── signup_screen.dart
+│   ├── customer/
+│   │   ├── home_screen.dart
+│   │   ├── food_detail_screen.dart
+│   │   ├── cart_screen.dart
+│   │   ├── order_history_screen.dart
+│   │   └── ussd_info_screen.dart
+│   ├── buka_owner/
+│   │   ├── buka_dashboard.dart
+│   │   └── order_management_screen.dart
+│   └── profile/
+│       └── profile_screen.dart
+│
+├── components/                    # Reusable widgets
+│   ├── food_card.dart
+│   ├── category_filter.dart
+│   ├── buka_list_item.dart
+│   ├── order_status_badge.dart
+│   ├── loader.dart
+│   └── custom_button.dart
+│
+├── routes/                        # Navigation and route configs
+│   └── app_router.dart
+│
+├── data/                          # Dummy data, initial seeding
+│   └── sample_foods.dart
+│
+└── config/                        # App-wide config (env vars, API base URLs)
+    └── app_config.dart
+
+
+
+
+
+lib/
+Main source folder where all your Dart code lives.
+
+🔹 main.dart
+The entry point of the app.
+
+Sets up app-wide configurations, theme, and initializes navigation and providers.
+
+📁 core/
+Reusable logic & config shared across the app.
+
+▸ constants/
+Define all your colors, fonts, padding, spacing, string literals.
+
+Example: AppColors.primary, AppStrings.orderConfirmed
+
+▸ services/
+Houses all external services and integrations like:
+
+API calls to backend (api_service.dart)
+
+Local storage (shared_prefs_service.dart)
+
+Notifications (notification_service.dart)
+
+Payment or SMS gateways
+
+▸ utils/
+Helper functions used across different parts of the app.
+
+Example: currency formatters, date parsers, image loaders
+
+▸ theme/
+Sets up custom themes, including light/dark modes.
+
+Holds font styles, text themes, button styles, etc.
+
+📁 models/
+Contains your data classes / DTOs that map to backend responses.
+
+user_model.dart – name, email, role, etc.
+
+food_item_model.dart – food name, price, image, category
+
+order_model.dart – items, status, timestamps
+
+📁 providers/
+Manages state using Riverpod, Provider, Bloc, etc.
+
+auth_provider.dart – tracks login/signup state
+
+food_provider.dart – fetch and store food items
+
+cart_provider.dart – add/remove/update cart items
+
+order_provider.dart – handles order placing and tracking
+
+📁 screens/
+Your app pages organized by user flow.
+
+▸ auth/
+login_screen.dart: Login form UI
+
+signup_screen.dart: Register new user or buka owner
+
+▸ customer/
+home_screen.dart: Landing page with categories, featured items
+
+food_detail_screen.dart: View selected food details, add to cart
+
+cart_screen.dart: View cart items and checkout
+
+order_history_screen.dart: View previous orders
+
+ussd_info_screen.dart: Educate users on how to use USSD/SMS ordering
+
+▸ buka_owner/
+buka_dashboard.dart: Manage buka's own food listings and status
+
+order_management_screen.dart: View/manage incoming orders
+
+▸ profile/
+profile_screen.dart: Manage user profile, logout, update info
+
+📁 components/
+Reusable widgets that keep UI DRY (Don't Repeat Yourself).
+
+food_card.dart: Widget to show food name, image, and price
+
+category_filter.dart: Select between categories like Swallow, Drinks
+
+buka_list_item.dart: Preview buka info (name, rating, distance)
+
+order_status_badge.dart: Color-coded badge for status (Pending, Delivered)
+
+loader.dart: Simple loading spinner
+
+custom_button.dart: Consistent button widget with theming
+
+📁 routes/
+Handles named route navigation and app flow transitions.
+
+app_router.dart: All route declarations + logic (e.g., '/home', '/cart')
+
+📁 data/
+Temporary hardcoded data for UI prototyping or testing before backend is hooked.
+
+sample_foods.dart: Dummy food list with price/image/etc.
+
+📁 config/
+App-wide configuration settings.
+
+app_config.dart: API base URLs, app name, default language, etc.
+
+Later, you can expand this to support staging/production configs.
+
+✅ Summary
+Folder/File	Purpose
+main.dart	Launches the app and sets up theme, routing
+core/	App-wide utilities, services, constants
+models/	Data models for user, food, orders
+providers/	App state management logic
+screens/	All UI screens grouped by flow
+components/	Reusable widgets to keep your UI clean
+routes/	App navigation logic
+data/	Dummy data for testing
+config/	App config & environment setup
