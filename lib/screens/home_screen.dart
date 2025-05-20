@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:tell_am/components/bottom_navbar.dart';
+import 'package:tell_am/screens/food_detail.dart';
+import 'package:tell_am/models/cart_manager.dart';
 
 class HomeScreen extends StatefulWidget{
   const HomeScreen({Key?key}):super(key:key);
@@ -68,13 +69,15 @@ class HomeScreenState extends State<HomeScreen>{
   ];
   final List<Map<String, dynamic>> _featuredItems = [
     {
-      'image': 'assets/images/Jollof Rice.jpg',
+      'image': 'assets/images/Jollof rice and Plantain.jpg',
       'name': 'Jollof Rice & Chicken',
       'restaurant': 'Mama\'s Kitchen',
       'rating': 4.8,
       'price': 2500,
       'currency': '₦',
+      'prepTime' : 20,
       'isFavorite': true,
+      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
     {
       'image': 'assets/images/Egusi Soup.jpg',
@@ -84,6 +87,8 @@ class HomeScreenState extends State<HomeScreen>{
       'price': 3200,
       'currency': '₦',
       'isFavorite': false,
+      'prepTime' : 20,
+      'description': 'Enjoy delicious Egusi soup and nice pounded yam at Traditional Tastes'
     },
     {
       'image': 'assets/images/Pancakes.jpg',
@@ -93,6 +98,8 @@ class HomeScreenState extends State<HomeScreen>{
       'price': 2800,
       'currency': '₦',
       'isFavorite': true,
+      'prepTime' : 20,
+      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
     {
       'image': 'assets/images/jollof rice and Plantain.jpg',
@@ -102,6 +109,8 @@ class HomeScreenState extends State<HomeScreen>{
       'price': 3000,
       'currency': '₦',
       'isFavorite': false,
+      'prepTime' : 20,
+      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
   ];
 
@@ -182,8 +191,12 @@ class HomeScreenState extends State<HomeScreen>{
   }
 
   void _navigateToFoodDetail(Map<String, dynamic> food) {
-    // Navigate to food detail
-    // Navigator.pushNamed(context, '/food-detail', arguments: {'foodId': food['id']});
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodDetailScreen(food: food),
+      ),
+    );
   }
 
   void _toggleFavorite(int index) {
@@ -647,7 +660,14 @@ Widget build(BuildContext context){
 
   Widget _buildFeaturedItem(Map<String, dynamic> food, int index) {
     return GestureDetector(
-      onTap: () => _navigateToFoodDetail(food),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FoodDetailScreen(food: food),
+          ),
+        );
+      },
       child: Container(
         width: 180,
         margin: const EdgeInsets.symmetric(horizontal: 8),

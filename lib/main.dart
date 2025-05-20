@@ -5,7 +5,7 @@ import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/profile.dart';
 import 'screens/home_screen.dart';
-import 'package:flutter/foundation.dart';
+import 'screens/food_detail.dart';
 void main() {
   runApp(
     DevicePreview(
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(), // Your app's home screen
+      home: const HomeScreen(), // Your app's home screen
     );
   }
 }
