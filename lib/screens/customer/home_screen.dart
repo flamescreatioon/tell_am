@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:tell_am/components/bottom_navbar.dart';
-import 'package:tell_am/screens/food_detail.dart';
-import 'package:tell_am/models/cart_manager.dart';
+import 'package:tell_am/components/custom_appbar.dart';
+import 'package:tell_am/screens/customer/food_detail_screen.dart';
 
-class HomeScreen extends StatefulWidget{
-  const HomeScreen({Key?key}):super(key:key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  HomeScreenState createState()=>HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen>{
+class HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   int _currentBannerIndex = 0;
   final PageController _bannerController = PageController();
@@ -69,15 +69,13 @@ class HomeScreenState extends State<HomeScreen>{
   ];
   final List<Map<String, dynamic>> _featuredItems = [
     {
-      'image': 'assets/images/Jollof rice and Plantain.jpg',
+      'image': 'assets/images/Jollof Rice.jpg',
       'name': 'Jollof Rice & Chicken',
       'restaurant': 'Mama\'s Kitchen',
       'rating': 4.8,
       'price': 2500,
       'currency': '₦',
-      'prepTime' : 20,
       'isFavorite': true,
-      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
     {
       'image': 'assets/images/Egusi Soup.jpg',
@@ -87,8 +85,6 @@ class HomeScreenState extends State<HomeScreen>{
       'price': 3200,
       'currency': '₦',
       'isFavorite': false,
-      'prepTime' : 20,
-      'description': 'Enjoy delicious Egusi soup and nice pounded yam at Traditional Tastes'
     },
     {
       'image': 'assets/images/Pancakes.jpg',
@@ -98,8 +94,6 @@ class HomeScreenState extends State<HomeScreen>{
       'price': 2800,
       'currency': '₦',
       'isFavorite': true,
-      'prepTime' : 20,
-      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
     {
       'image': 'assets/images/jollof rice and Plantain.jpg',
@@ -109,20 +103,20 @@ class HomeScreenState extends State<HomeScreen>{
       'price': 3000,
       'currency': '₦',
       'isFavorite': false,
-      'prepTime' : 20,
-      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
   ];
 
   final List<Map<String, dynamic>> _popularBukas = [
     {
+      'id': 'buka1',
       'image': 'assets/images/Beans Porridge.jpg',
-      'name': 'Mama\'s Kitchen',
+      'name': "Mama's Kitchen",
       'rating': 4.8,
       'deliveryTime': '25-35',
       'distance': 1.2,
     },
     {
+      'id': 'buka2',
       'image': 'assets/images/Vegetable soup and Fufu.jpg',
       'name': 'Traditional Tastes',
       'rating': 4.6,
@@ -130,15 +124,48 @@ class HomeScreenState extends State<HomeScreen>{
       'distance': 2.1,
     },
     {
+      'id': 'buka3',
       'image': 'assets/images/Pancakes.jpg',
       'name': 'Northern Delights',
       'rating': 4.7,
       'deliveryTime': '20-30',
       'distance': 0.8,
     },
+    {
+      'id': 'buka4',
+      'image': 'assets/images/Beans Porridge.jpg',
+      'name': 'Mama Nkechi',
+      'rating': 4.5,
+      'deliveryTime': '15-25',
+      'distance': 1.5,
+    },
+    {
+      'id': 'buka5',
+      'image': 'assets/images/Salad.jpg',
+      'name': "Healty Eats",
+      'rating': 4.9,
+      'deliveryTime': '25-35',
+      'distance': 1.2,
+    },
+    {
+      'id': 'buka6',
+      'image': 'assets/images/Vegetable soup and Fufu.jpg',
+      'name': 'Sweet Treats',
+      'rating': 4.4,
+      'deliveryTime': '35-45',
+      'distance': 2.5,
+    },
+    {
+      'id': 'buka7',
+      'image': 'assets/images/Pancakes.jpg',
+      'name': "Betty's Breakfast",
+      'rating': 4.2,
+      'deliveryTime': '20-30',
+      'distance': 1.5,
+    },
   ];
 
-@override
+  @override
   void initState() {
     super.initState();
     _startBannerTimer();
@@ -159,7 +186,7 @@ class HomeScreenState extends State<HomeScreen>{
       } else {
         _currentBannerIndex = 0;
       }
-      
+
       if (_bannerController.hasClients) {
         _bannerController.animateToPage(
           _currentBannerIndex,
@@ -179,38 +206,34 @@ class HomeScreenState extends State<HomeScreen>{
 
   void _navigateToCategory(int categoryId) {
     Navigator.pushNamed(
-      context, 
-      '/menu', 
+      context,
+      '/menu',
       arguments: {'categoryId': categoryId},
     );
   }
 
   void _navigateToBuka(Map<String, dynamic> buka) {
     // Navigate to restaurant/buka detail
-    // Navigator.pushNamed(context, '/buka-detail', arguments: {'bukaId': buka['id']});
+    Navigator.pushNamed(context, '/buka-detail',
+        arguments: {'bukaId': buka['id']});
   }
 
   void _navigateToFoodDetail(Map<String, dynamic> food) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FoodDetailScreen(food: food),
-      ),
-    );
+    // Navigate to food detail
+    // Navigator.pushNamed(context, '/food-detail', arguments: {'foodId': food['id']});
   }
 
   void _toggleFavorite(int index) {
     setState(() {
-      _featuredItems[index]['isFavorite'] = !_featuredItems[index]['isFavorite'];
+      _featuredItems[index]['isFavorite'] =
+          !_featuredItems[index]['isFavorite'];
     });
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          _featuredItems[index]['isFavorite'] 
-              ? 'Added to favorites' 
-              : 'Removed from favorites'
-        ),
+        content: Text(_featuredItems[index]['isFavorite']
+            ? 'Added to favorites'
+            : 'Removed from favorites'),
         duration: const Duration(seconds: 1),
       ),
     );
@@ -232,166 +255,151 @@ class HomeScreenState extends State<HomeScreen>{
     );
   }
 
-
-@override
-Widget build(BuildContext context){
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Home'),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart_outlined),
-          onPressed: (){
-            
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: HomeAppBar(
+          // title: const Text('Home'),
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.shopping_cart_outlined),
+          //     onPressed: () {
+          //       Navigator.pushNamed(context, '/cart');
+          //     },
+          //   ),
+          //   IconButton(
+          //     icon: const Icon(Icons.notifications_outlined),
+          //     onPressed: () {
+          //       Navigator.pushNamed(context, '/notif');
+          //     },
+          //   )
+          // ],
+          ),
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 2));
           },
-        ),
-
-        IconButton(
-          icon: const Icon(Icons.notifications_outlined),
-          onPressed: (){
-
-          },
-        )
-      ],
-    ),
-
-    body: SafeArea(
-      child: RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 2));
-        }, child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Search for food, restaurants...',
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.filter_list),
-                      onPressed: (){
-
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0)
-                  ),
-                  ),
-                ),
-              
-              SizedBox(
-                height: 180,
-                child: PageView.builder(
-                  controller: _bannerController,
-                  onPageChanged: (index){
-                    setState(() {
-                      _currentBannerIndex = index;
-                    });
-                  },
-                  itemCount: _banners.length,
-                  itemBuilder: (context, index){
-                    return _buildBanner(_banners[index]);
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  _banners.length,
-                  (index) => Container(
-                    width: 8,
-                    height: 8,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _currentBannerIndex == index ? Colors.orange: Colors.orange.withOpacity(0.3),
-                    ),
-                  )
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Categories',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    TextButton(
-                      onPressed: (){
-
-                      },
-                      child: const Text(
-                        'See all',
-                        style: TextStyle(
-                          color: Colors.orange,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                        hintText: 'Search for food, restaurants...',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.filter_list),
+                          onPressed: () {},
                         ),
-
-                      ),
-                    )
-
-                  ],
-                )
-              ),
-              SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  itemCount: _categories.length,
-                  itemBuilder: (context, index){
-                    return _buildCategoryItem(_categories[index]);
-
-                  }
-
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Featured Items',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                    
-                      ),
-                    ),
-                  TextButton(
-                    onPressed: (){
-
-                    },
-                    child: const Text(
-                      'See all',
-                      style: TextStyle(
-                        color: Colors.orange,
-                      ),
-                    ),
-                  )
-                  ],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 0)),
                   ),
-              ),
-
-               SizedBox(
+                ),
+                SizedBox(
+                  height: 180,
+                  child: PageView.builder(
+                    controller: _bannerController,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentBannerIndex = index;
+                      });
+                    },
+                    itemCount: _banners.length,
+                    itemBuilder: (context, index) {
+                      return _buildBanner(_banners[index]);
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      _banners.length,
+                      (index) => Container(
+                            width: 8,
+                            height: 8,
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentBannerIndex == index
+                                  ? Colors.orange
+                                  : Colors.orange.withValues(alpha: 0.3),
+                            ),
+                          )),
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Categories',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'See all',
+                            style: TextStyle(
+                              color: Colors.orange,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+                SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      itemCount: _categories.length,
+                      itemBuilder: (context, index) {
+                        return _buildCategoryItem(_categories[index]);
+                      }),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Featured Items',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'See all',
+                          style: TextStyle(
+                            color: Colors.orange,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
                   height: 280,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -402,8 +410,9 @@ Widget build(BuildContext context){
                     },
                   ),
                 ),
-                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -416,7 +425,7 @@ Widget build(BuildContext context){
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigate to all restaurants
+                          Navigator.pushNamed(context, '/all_buka');
                         },
                         child: const Text(
                           'See All',
@@ -436,10 +445,10 @@ Widget build(BuildContext context){
                   },
                 ),
                 const SizedBox(height: 16),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
       ),
       bottomNavigationBar: const BottomNavbar(),
     );
@@ -472,7 +481,7 @@ Widget build(BuildContext context){
                 Text(
                   'johndoe@example.com',
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 14,
                   ),
                 ),
@@ -498,7 +507,8 @@ Widget build(BuildContext context){
             Navigator.pop(context);
             // Navigator.pushNamed(context, '/favorites');
           }),
-          _buildDrawerItem(Icons.location_on_outlined, 'Delivery Addresses', () {
+          _buildDrawerItem(Icons.location_on_outlined, 'Delivery Addresses',
+              () {
             Navigator.pop(context);
             // Navigator.pushNamed(context, '/addresses');
           }),
@@ -571,7 +581,7 @@ Widget build(BuildContext context){
             image: AssetImage(banner['image']),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.3),
+              Colors.black.withValues(alpha: 0.3),
               BlendMode.darken,
             ),
             onError: (error, stackTrace) {
@@ -609,7 +619,8 @@ Widget build(BuildContext context){
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 ),
                 child: const Text('Order Now'),
               ),
@@ -632,7 +643,7 @@ Widget build(BuildContext context){
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: Colors.orange.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -660,14 +671,7 @@ Widget build(BuildContext context){
 
   Widget _buildFeaturedItem(Map<String, dynamic> food, int index) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FoodDetailScreen(food: food),
-          ),
-        );
-      },
+      onTap: () => _navigateToFoodDetail(food),
       child: Container(
         width: 180,
         margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -676,7 +680,7 @@ Widget build(BuildContext context){
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),
@@ -689,7 +693,8 @@ Widget build(BuildContext context){
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(16)),
                   child: Image.asset(
                     food['image'],
                     height: 140,
@@ -699,7 +704,8 @@ Widget build(BuildContext context){
                       return Container(
                         height: 140,
                         color: Colors.grey[300],
-                        child: const Icon(Icons.restaurant, size: 40, color: Colors.grey),
+                        child: const Icon(Icons.restaurant,
+                            size: 40, color: Colors.grey),
                       );
                     },
                   ),
@@ -716,7 +722,9 @@ Widget build(BuildContext context){
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
-                        food['isFavorite'] ? Icons.favorite : Icons.favorite_border,
+                        food['isFavorite']
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         color: food['isFavorite'] ? Colors.red : Colors.grey,
                         size: 20,
                       ),
@@ -725,7 +733,7 @@ Widget build(BuildContext context){
                 ),
               ],
             ),
-            
+
             // Food Details
             Padding(
               padding: const EdgeInsets.all(12),
@@ -813,7 +821,7 @@ Widget build(BuildContext context){
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),
@@ -823,7 +831,8 @@ Widget build(BuildContext context){
           children: [
             // Restaurant Image
             ClipRRect(
-              borderRadius: const BorderRadius.horizontal(left: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.horizontal(left: Radius.circular(16)),
               child: Image.asset(
                 buka['image'],
                 height: 100,
@@ -834,12 +843,13 @@ Widget build(BuildContext context){
                     height: 100,
                     width: 100,
                     color: Colors.grey[300],
-                    child: const Icon(Icons.restaurant, size: 40, color: Colors.grey),
+                    child: const Icon(Icons.restaurant,
+                        size: 40, color: Colors.grey),
                   );
                 },
               ),
             ),
-            
+
             // Restaurant Details
             Expanded(
               child: Padding(
@@ -873,7 +883,8 @@ Widget build(BuildContext context){
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Icon(Icons.access_time, color: Colors.grey[600], size: 16),
+                        Icon(Icons.access_time,
+                            color: Colors.grey[600], size: 16),
                         const SizedBox(width: 4),
                         Text(
                           '${buka['deliveryTime']} min',
@@ -883,7 +894,8 @@ Widget build(BuildContext context){
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Icon(Icons.location_on, color: Colors.grey[600], size: 16),
+                        Icon(Icons.location_on,
+                            color: Colors.grey[600], size: 16),
                         const SizedBox(width: 4),
                         Text(
                           '${buka['distance']} km',
@@ -898,7 +910,7 @@ Widget build(BuildContext context){
                 ),
               ),
             ),
-            
+
             // View Button
             Padding(
               padding: const EdgeInsets.all(12),

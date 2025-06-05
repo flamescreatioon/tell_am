@@ -32,6 +32,9 @@ dependencies:
     sdk: flutter
   device_preview: ^1.2.0
   image_picker: ^0.8.7+5
+  google_fonts: ^6.2.1
+  http: ^1.4.0
+  dropdown_button2: ^2.3.9
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -79,6 +82,11 @@ flutter:
     - assets/images/Rice and Stew.png
     - assets/images/Stewed Beans.jpg
     - assets/images/Vegetable soup and Fufu.jpg
+    - assets/images/Yam and Egg Sauce.jpg
+    - assets/images/Cake.jpg
+    - assets/images/Salad.jpg
+    - assets/Logo/
+    - assets/data/
  
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

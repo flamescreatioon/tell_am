@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tell_am/components/bottom_navbar.dart';
 
-class BukaDetailsScreen extends StatefulWidget {
+class BukaDashboard extends StatefulWidget {
   final String bukaId;
 
-  const BukaDetailsScreen({
-    Key? key,
+  const BukaDashboard({
+    super.key,
     required this.bukaId,
-  }) : super(key: key);
+  });
 
   @override
-  BukaDetailsScreenState createState() => BukaDetailsScreenState();
+  BukaDashboardState createState() => BukaDashboardState();
 }
 
-class BukaDetailsScreenState extends State<BukaDetailsScreen>
+class BukaDashboardState extends State<BukaDashboard>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
@@ -50,6 +51,42 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
       'distance': 0.8,
       'isOpen': false,
     },
+    'buka4': {
+      'id': 'buka4',
+      'name': 'Mama Nkechi',
+      'image': 'assets/images/Bean Porridge.jpg',
+      'rating': 4.5,
+      'deliveryTime': '15-25',
+      'distance': 1.5,
+      'isOpen': true,
+    },
+    'buka5': {
+      'id': 'buka5',
+      'name': 'Healthy Eats',
+      'image': 'assets/images/Salad.jpg',
+      'rating': 4.9,
+      'deliveryTime': '25-35',
+      'distance': 1.2,
+      'isOpen': true,
+    },
+    'buka6': {
+      'id': 'buka6',
+      'name': 'Sweet Treats',
+      'image': 'assets/images/Cake.jpg',
+      'rating': 4.4,
+      'deliveryTime': '35-45',
+      'distance': 2.5,
+      'isOpen': false,
+    },
+    'buka7': {
+      'id': 'buka7',
+      'name': "Betty's Breakfast",
+      'image': 'assets/images/Pancakes.jpg',
+      'rating': 4.2,
+      'deliveryTime': '20-30',
+      'distance': 1.5,
+      'isOpen': true,
+    }
   };
 
   final List<Map<String, dynamic>> _menuCategories = [
@@ -153,7 +190,9 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
       return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -195,7 +234,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withOpacity(0.7),
+                          Colors.black.withValues(alpha: 0.7),
                         ],
                       ),
                     ),
@@ -204,7 +243,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
               ),
             ),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
@@ -220,7 +259,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.share_outlined),
+                icon: const Icon(Icons.share_outlined, color: Colors.white),
                 onPressed: () {
                   // Implement share functionality
                 },
@@ -329,6 +368,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
             pinned: true,
             delegate: _SliverAppBarDelegate(
               TabBar(
+                labelStyle: GoogleFonts.quicksand(),
                 controller: _tabController,
                 isScrollable: true,
                 labelColor: Colors.orange,
@@ -369,7 +409,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),

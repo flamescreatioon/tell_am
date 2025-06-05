@@ -3,7 +3,7 @@ import 'package:tell_am/components/bottom_navbar.dart';
 
 class BukaScreen extends StatefulWidget {
   // Renamed class
-  const BukaScreen({Key? key}) : super(key: key);
+  const BukaScreen({super.key});
 
   @override
   BukaScreenState createState() => BukaScreenState(); // Renamed state
@@ -47,6 +47,50 @@ class BukaScreenState extends State<BukaScreen> {
       'isOpen': false,
       'minimumOrder': 1800,
       'deliveryFee': 400,
+    },
+    {
+      'image': 'assets/images/Beans Porridge.jpg',
+      'name': 'Mama Nkechi',
+      'rating': 4.5,
+      'deliveryTime': '15-25',
+      'distance': 1.5,
+      'categories': ['Beans', 'Local Dishes'],
+      'isOpen': true,
+      'minimumOrder': 1000,
+      'deliveryFee': 300,
+    },
+    {
+      'image': 'assets/images/Salad.jpg',
+      'name': 'Healthy Eats',
+      'rating': 4.9,
+      'deliveryTime': '25-35',
+      'distance': 1.2,
+      'categories': ['Salads', 'Healthy Meals'],
+      'isOpen': true,
+      'minimumOrder': 2500,
+      'deliveryFee': 800,
+    },
+    {
+      'image': 'assets/images/Cake.jpg',
+      'name': 'Sweet Treats',
+      'rating': 4.4,
+      'deliveryTime': '35-45',
+      'distance': 2.5,
+      'categories': ['Desserts', 'Cakes'],
+      'isOpen': false,
+      'minimumOrder': 3000,
+      'deliveryFee': 900,
+    },
+    {
+      'image': 'assets/images/Pancakes.jpg',
+      'name': "Betty's Breakfast",
+      'rating': 4.2,
+      'deliveryTime': '20-30',
+      'distance': 1.5,
+      'categories': ['Pancakes', 'Breakfast', 'Light Meal'],
+      'isOpen': true,
+      'minimumOrder': 1200,
+      'deliveryFee': 700,
     },
   ];
 
@@ -130,7 +174,7 @@ class BukaScreenState extends State<BukaScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),
@@ -241,7 +285,7 @@ class BukaScreenState extends State<BukaScreen> {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.orange.withOpacity(0.1),
+                                color: Colors.orange.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Text(
