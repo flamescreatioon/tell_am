@@ -13,10 +13,17 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class RegisterScreenState extends State<RegisterScreen> {
+  final List<String> country = [
+    'One',
+    'Two',
+    'Free',
+    'Four',
+  ];
   bool isChecked = false;
   Country? selectedCountry;
   List<Country> countryList = [];
-  TextEditingController countrySearchController = TextEditingController();
+  List<String> countryNames = [];
+  final TextEditingController countrySearchController = TextEditingController();
 
   @override
   void initState() {
@@ -28,7 +35,14 @@ class RegisterScreenState extends State<RegisterScreen> {
     final countries = await CountryService.loadCountries();
     setState(() {
       countryList = countries;
+      countryNames = countries.map((c) => c.name).toList();
     });
+  }
+
+  @override
+  void dispose() {
+    countrySearchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -72,7 +86,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                         Row(
                           children: [
                             Flexible(
-                              flex: 2, // Smaller width for dropdown
+                              flex: 3, // Smaller width for dropdown
                               child: DropdownButtonFormField2<Country>(
                                 value: selectedCountry,
                                 decoration: InputDecoration(
@@ -84,7 +98,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                                 isExpanded: true,
                                 dropdownStyleData: DropdownStyleData(
                                   maxHeight: 300,
-                                  width: 300, // Set the popup width here
+                                  width: 300,
                                 ),
                                 items: countryList.map((country) {
                                   return DropdownMenuItem<Country>(
@@ -106,23 +120,12 @@ class RegisterScreenState extends State<RegisterScreen> {
                                     return Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        country.dialCode,
-                                        // '${country.flagEmoji} ${country.name} (${country.dialCode})',
+                                        '${country.flagEmoji}  ${country.dialCode}',
                                         style:
                                             GoogleFonts.quicksand(fontSize: 16),
                                       ),
                                     );
                                   }).toList();
-                                },
-                                dropdownSearchData: DropdownSearchData(
-                                  searchController: countrySearchController,
-                                ),
-                                // Removed dropdownSearchInnerWidget as it is not a valid parameter
-                                // This is required to clear the search value when you close the dropdown
-                                onMenuStateChange: (isOpen) {
-                                  if (!isOpen) {
-                                    countrySearchController.clear();
-                                  }
                                 },
                               ),
                             ),
@@ -291,4 +294,10 @@ class RegisterScreenState extends State<RegisterScreen> {
       ),
     )));
   }
+}
+
+extension on DropdownMenuItem<Country> {
+  get name => null;
+
+  get dialCode => null;
 }

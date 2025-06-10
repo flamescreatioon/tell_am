@@ -28,13 +28,13 @@ class LoginScreenState extends State<LoginScreen> {
               const Image(
                   image: AssetImage('assets/Logo/TellAm (Light)16x9.png')),
               const SizedBox(height: 4.0),
-              const Center(
-                child: Icon(
-                  Icons.lock,
-                  size: 60,
-                  color: Color.fromARGB(255, 255, 145, 77),
-                ),
-              ),
+              // const Center(
+              //   child: Icon(
+              //     Icons.lock,
+              //     size: 60,
+              //     color: Color.fromARGB(255, 255, 145, 77),
+              //   ),
+              // ),
               const SizedBox(height: 24.0),
               const Text(
                 'Welcome Back',
@@ -61,8 +61,8 @@ class LoginScreenState extends State<LoginScreen> {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'Enter your email',
+                          labelText: 'Email or Phone Number',
+                          hintText: 'Enter your email or phone number',
                           prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
