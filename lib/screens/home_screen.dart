@@ -5,14 +5,14 @@ import 'package:tell_am/components/bottom_navbar.dart';
 import 'package:tell_am/screens/food_detail.dart';
 import 'package:tell_am/models/cart_manager.dart';
 
-class HomeScreen extends StatefulWidget{
-  const HomeScreen({Key?key}):super(key:key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  HomeScreenState createState()=>HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen>{
+class HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   int _currentBannerIndex = 0;
   final PageController _bannerController = PageController();
@@ -138,7 +138,7 @@ class HomeScreenState extends State<HomeScreen>{
     },
   ];
 
-@override
+  @override
   void initState() {
     super.initState();
     _startBannerTimer();
@@ -159,7 +159,7 @@ class HomeScreenState extends State<HomeScreen>{
       } else {
         _currentBannerIndex = 0;
       }
-      
+
       if (_bannerController.hasClients) {
         _bannerController.animateToPage(
           _currentBannerIndex,
@@ -175,12 +175,9 @@ class HomeScreenState extends State<HomeScreen>{
     if (query.trim().isNotEmpty) {
       // Navigator.pushNamed(context, '/search', arguments: {'query': query});
     }
-  }
-
-  void _navigateToCategory(int categoryId) {
     Navigator.pushNamed(
-      context, 
-      '/menu', 
+      context,
+      '/menu',
       arguments: {'categoryId': categoryId},
     );
   }
@@ -201,16 +198,15 @@ class HomeScreenState extends State<HomeScreen>{
 
   void _toggleFavorite(int index) {
     setState(() {
-      _featuredItems[index]['isFavorite'] = !_featuredItems[index]['isFavorite'];
+      _featuredItems[index]['isFavorite'] =
+          !_featuredItems[index]['isFavorite'];
     });
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          _featuredItems[index]['isFavorite'] 
-              ? 'Added to favorites' 
-              : 'Removed from favorites'
-        ),
+        content: Text(_featuredItems[index]['isFavorite']
+            ? 'Added to favorites'
+            : 'Removed from favorites'),
         duration: const Duration(seconds: 1),
       ),
     );
@@ -232,166 +228,147 @@ class HomeScreenState extends State<HomeScreen>{
     );
   }
 
-
-@override
-Widget build(BuildContext context){
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Home'),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart_outlined),
-          onPressed: (){
-            
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart_outlined),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.notifications_outlined),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 2));
           },
-        ),
-
-        IconButton(
-          icon: const Icon(Icons.notifications_outlined),
-          onPressed: (){
-
-          },
-        )
-      ],
-    ),
-
-    body: SafeArea(
-      child: RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 2));
-        }, child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Search for food, restaurants...',
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.filter_list),
-                      onPressed: (){
-
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0)
-                  ),
-                  ),
-                ),
-              
-              SizedBox(
-                height: 180,
-                child: PageView.builder(
-                  controller: _bannerController,
-                  onPageChanged: (index){
-                    setState(() {
-                      _currentBannerIndex = index;
-                    });
-                  },
-                  itemCount: _banners.length,
-                  itemBuilder: (context, index){
-                    return _buildBanner(_banners[index]);
-                  },
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  _banners.length,
-                  (index) => Container(
-                    width: 8,
-                    height: 8,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _currentBannerIndex == index ? Colors.orange: Colors.orange.withOpacity(0.3),
-                    ),
-                  )
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Categories',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    TextButton(
-                      onPressed: (){
-
-                      },
-                      child: const Text(
-                        'See all',
-                        style: TextStyle(
-                          color: Colors.orange,
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                        hintText: 'Search for food, restaurants...',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.filter_list),
+                          onPressed: () {},
                         ),
-
-                      ),
-                    )
-
-                  ],
-                )
-              ),
-              SizedBox(
-                height: 120,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  itemCount: _categories.length,
-                  itemBuilder: (context, index){
-                    return _buildCategoryItem(_categories[index]);
-
-                  }
-
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Featured Items',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                    
-                      ),
-                    ),
-                  TextButton(
-                    onPressed: (){
-
-                    },
-                    child: const Text(
-                      'See all',
-                      style: TextStyle(
-                        color: Colors.orange,
-                      ),
-                    ),
-                  )
-                  ],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 0)),
                   ),
-              ),
-
-               SizedBox(
+                ),
+                SizedBox(
+                  height: 180,
+                  child: PageView.builder(
+                    controller: _bannerController,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentBannerIndex = index;
+                      });
+                    },
+                    itemCount: _banners.length,
+                    itemBuilder: (context, index) {
+                      return _buildBanner(_banners[index]);
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      _banners.length,
+                      (index) => Container(
+                            width: 8,
+                            height: 8,
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentBannerIndex == index
+                                  ? Colors.orange
+                                  : Colors.orange.withOpacity(0.3),
+                            ),
+                          )),
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Categories',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'See all',
+                            style: TextStyle(
+                              color: Colors.orange,
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+                SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      itemCount: _categories.length,
+                      itemBuilder: (context, index) {
+                        return _buildCategoryItem(_categories[index]);
+                      }),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Featured Items',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'See all',
+                          style: TextStyle(
+                            color: Colors.orange,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
                   height: 280,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -402,8 +379,9 @@ Widget build(BuildContext context){
                     },
                   ),
                 ),
-                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -436,12 +414,60 @@ Widget build(BuildContext context){
                   },
                 ),
                 const SizedBox(height: 16),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+<<<<<<< Updated upstream
       ),
       bottomNavigationBar: const BottomNavbar(),
+=======
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        currentIndex: 0,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              // Current page - Home
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/menu');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/orders-history');
+              break;
+            case 3:
+              Navigator.pushNamed(context, '/profile');
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_menu_outlined),
+            activeIcon: Icon(Icons.restaurant_menu),
+            label: 'Menu',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt_long_outlined),
+            activeIcon: Icon(Icons.receipt_long),
+            label: 'Orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
+>>>>>>> Stashed changes
     );
   }
 
@@ -498,7 +524,8 @@ Widget build(BuildContext context){
             Navigator.pop(context);
             // Navigator.pushNamed(context, '/favorites');
           }),
-          _buildDrawerItem(Icons.location_on_outlined, 'Delivery Addresses', () {
+          _buildDrawerItem(Icons.location_on_outlined, 'Delivery Addresses',
+              () {
             Navigator.pop(context);
             // Navigator.pushNamed(context, '/addresses');
           }),
@@ -609,7 +636,8 @@ Widget build(BuildContext context){
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 ),
                 child: const Text('Order Now'),
               ),
@@ -689,7 +717,8 @@ Widget build(BuildContext context){
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(16)),
                   child: Image.asset(
                     food['image'],
                     height: 140,
@@ -699,7 +728,8 @@ Widget build(BuildContext context){
                       return Container(
                         height: 140,
                         color: Colors.grey[300],
-                        child: const Icon(Icons.restaurant, size: 40, color: Colors.grey),
+                        child: const Icon(Icons.restaurant,
+                            size: 40, color: Colors.grey),
                       );
                     },
                   ),
@@ -716,7 +746,9 @@ Widget build(BuildContext context){
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
-                        food['isFavorite'] ? Icons.favorite : Icons.favorite_border,
+                        food['isFavorite']
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         color: food['isFavorite'] ? Colors.red : Colors.grey,
                         size: 20,
                       ),
@@ -725,7 +757,7 @@ Widget build(BuildContext context){
                 ),
               ],
             ),
-            
+
             // Food Details
             Padding(
               padding: const EdgeInsets.all(12),
@@ -823,7 +855,8 @@ Widget build(BuildContext context){
           children: [
             // Restaurant Image
             ClipRRect(
-              borderRadius: const BorderRadius.horizontal(left: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.horizontal(left: Radius.circular(16)),
               child: Image.asset(
                 buka['image'],
                 height: 100,
@@ -834,12 +867,13 @@ Widget build(BuildContext context){
                     height: 100,
                     width: 100,
                     color: Colors.grey[300],
-                    child: const Icon(Icons.restaurant, size: 40, color: Colors.grey),
+                    child: const Icon(Icons.restaurant,
+                        size: 40, color: Colors.grey),
                   );
                 },
               ),
             ),
-            
+
             // Restaurant Details
             Expanded(
               child: Padding(
@@ -873,7 +907,8 @@ Widget build(BuildContext context){
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Icon(Icons.access_time, color: Colors.grey[600], size: 16),
+                        Icon(Icons.access_time,
+                            color: Colors.grey[600], size: 16),
                         const SizedBox(width: 4),
                         Text(
                           '${buka['deliveryTime']} min',
@@ -883,7 +918,8 @@ Widget build(BuildContext context){
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Icon(Icons.location_on, color: Colors.grey[600], size: 16),
+                        Icon(Icons.location_on,
+                            color: Colors.grey[600], size: 16),
                         const SizedBox(width: 4),
                         Text(
                           '${buka['distance']} km',
@@ -898,7 +934,7 @@ Widget build(BuildContext context){
                 ),
               ),
             ),
-            
+
             // View Button
             Padding(
               padding: const EdgeInsets.all(12),
