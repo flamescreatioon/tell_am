@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tell_am/models/cart_manager.dart';
-import 'package:tell_am/screens/cart.dart';
+import 'package:tell_am/screens/customer/cart_screen.dart';
 
 class FoodDetailScreen extends StatefulWidget {
   final Map<String, dynamic> food;
@@ -199,7 +199,7 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
         borderRadius: BorderRadius.circular(8),
-        color: isSelected ? Colors.orange.withOpacity(0.1) : Colors.white,
+        color: isSelected ? Colors.orange.withValues(alpha: 0.1) : Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -295,7 +295,8 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
     );
   }
 
-  Widget _buildQuantityButton({required IconData icon, required Function() onTap}) {
+  Widget _buildQuantityButton(
+      {required IconData icon, required Function() onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -310,7 +311,8 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
   }
 
   Widget _buildBottomBar() {
-    double extrasTotal = selectedOptions.length * 100; // Adjust if extras have different prices
+    double extrasTotal =
+        selectedOptions.length * 100; // Adjust if extras have different prices
     double total = (widget.food['price'] ?? 0) * quantity + extrasTotal;
 
     return Container(
@@ -320,7 +322,8 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Total', style: TextStyle(fontSize: 14, color: Colors.grey)),
+              const Text('Total',
+                  style: TextStyle(fontSize: 14, color: Colors.grey)),
               Text(
                 '₦${total.toStringAsFixed(2)}',
                 style: const TextStyle(
@@ -341,7 +344,7 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                   'extras': List<String>.from(selectedOptions),
                   'id': widget.food['name'], // Use a unique id if available
                 };
-                
+
                 // Add the item to the CartManager
                 CartManager().addToCart(cartItem);
 
@@ -354,7 +357,8 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Cart(cartItems: CartManager().cartItems),
+                            builder: (context) =>
+                                Cart(cartItems: CartManager().cartItems),
                           ),
                         );
                       },

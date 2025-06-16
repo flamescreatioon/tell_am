@@ -28,6 +28,7 @@ lib/
 │   │   ├── cart_screen.dart
 │   │   ├── order_history_screen.dart
 │   │   └── ussd_info_screen.dart
+|   |   
 │   ├── buka_owner/
 │   │   ├── buka_dashboard.dart
 │   │   └── order_management_screen.dart
@@ -130,6 +131,8 @@ cart_screen.dart: View cart items and checkout
 order_history_screen.dart: View previous orders
 
 ussd_info_screen.dart: Educate users on how to use USSD/SMS ordering
+
+notification_screen.dart: Displays all the notifications that the user receives from the vendors, app or couriers
 
 ▸ buka_owner/
 buka_dashboard.dart: Manage buka's own food listings and status
