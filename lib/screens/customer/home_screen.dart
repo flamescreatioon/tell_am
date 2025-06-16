@@ -447,9 +447,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavbar(),
-=======
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:  BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
@@ -493,7 +491,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
->>>>>>> Stashed changes
+
     );
   }
 
