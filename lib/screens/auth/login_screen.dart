@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tell_am/screens/customer/home_screen.dart';
 import 'package:tell_am/screens/auth/register_screen.dart';
 import 'package:tell_am/components/button_01.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,8 +26,16 @@ class LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Image(
-                  image: AssetImage('assets/Logo/TellAm (Light)16x9.png')),
+              SvgPicture.asset(
+                'assets/Logo/1.svg',
+                semanticsLabel: 'TellAm Logo',
+                height: 100,
+                fit: BoxFit.cover,
+                // width: 100,
+                width: 100,
+              ),
+              // const Image(
+              //     image: AssetImage('assets/Logo/TellAm (Light)16x9.png')),
               const SizedBox(height: 4.0),
               // const Center(
               //   child: Icon(

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tell_am/models/country.dart';
 import 'package:tell_am/models/country_service.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -57,6 +58,14 @@ class RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SvgPicture.asset(
+                  'assets/Logo/1.svg',
+                  semanticsLabel: 'TellAm Logo',
+                  fit: BoxFit.cover,
+                  height: 100,
+                  // width: 100,
+                  width: 100,
+                ),
                 // const Image(
                 //     image: AssetImage('assets/Logo/TellAm (Light)16x9.png')),
                 // const SizedBox(height: .0),
