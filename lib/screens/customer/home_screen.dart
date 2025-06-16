@@ -202,11 +202,8 @@ class HomeScreenState extends State<HomeScreen> {
     if (query.trim().isNotEmpty) {
       // Navigator.pushNamed(context, '/search', arguments: {'query': query});
     }
-    Navigator.pushNamed(
-      context,
-      '/menu',
-      arguments: {'categoryId': categoryId},
-    );
+    // If you want to navigate to menu with a category, pass the categoryId as a parameter to this function.
+    // Example: _navigateToSearch(query, categoryId);
   }
 
   void _navigateToBuka(Map<String, dynamic> buka) {
@@ -447,7 +444,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar:  BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
@@ -491,7 +488,6 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-
     );
   }
 
@@ -708,6 +704,11 @@ class HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void _navigateToCategory(int categoryId) {
+    // Navigate to menu or category page with the selected categoryId
+    // Example: Navigator.pushNamed(context, '/menu', arguments: {'categoryId': categoryId});
   }
 
   Widget _buildFeaturedItem(Map<String, dynamic> food, int index) {
