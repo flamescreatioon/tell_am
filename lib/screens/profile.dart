@@ -71,7 +71,7 @@ class ProfileScreenState extends State<ProfileScreen>{
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
-                      Text(
+                      const Text(
                         'Orders',
                         style: TextStyle(
                           fontSize: 12,
@@ -91,7 +91,7 @@ class ProfileScreenState extends State<ProfileScreen>{
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
-                      Text(
+                      const Text(
                         'Expenses',
                         style: TextStyle(
                           fontSize: 12,
@@ -111,7 +111,7 @@ class ProfileScreenState extends State<ProfileScreen>{
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     children: [
-                      Text(
+                      const Text(
                         'Returns',
                         style: TextStyle(
                           fontSize: 12,
@@ -145,11 +145,11 @@ class ProfileScreenState extends State<ProfileScreen>{
                     const SizedBox(height: 12),
 
                     TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Full Name',
                         hintText: 'Achor Ugochukwu Nelson',
-                        prefixIcon: const Icon(Icons.person),
-                        border: const OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(),
                       ),
                     ),
 

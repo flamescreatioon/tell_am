@@ -15,7 +15,7 @@ class RegisterScreenState extends State<RegisterScreen>{
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(24.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -114,13 +114,13 @@ class RegisterScreenState extends State<RegisterScreen>{
                             ),
                              Expanded(
                               child: RichText(
-                                text: TextSpan(
+                                text: const TextSpan(
                                   text: 'I agree to the ',
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.blue,
                                   ),
-                                  children: const[
+                                  children: [
                                     TextSpan(
                                       text: 'Terms & Conditions',
                                       style: TextStyle(
@@ -156,7 +156,7 @@ class RegisterScreenState extends State<RegisterScreen>{
                     ),
                     minimumSize: const Size(double.infinity, 50),
                   ),
-                  child:Text(
+                  child:const Text(
                     'Create Account',
                     style: TextStyle(
                       fontSize: 16,

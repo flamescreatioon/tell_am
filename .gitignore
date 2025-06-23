@@ -41,3 +41,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+lib/screens/home_screen.dart
+lib/screens/home_screen.dart
+lib/main.dart
+lib/main.dart
+lib/screens/home_screen.dart
+lib/screens/register_screen.dart
+lib/screens/login_screen.dart

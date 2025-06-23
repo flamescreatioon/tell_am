@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:tell_am/components/bottom_navbar.dart';
-import 'package:tell_am/screens/food_detail.dart';
-import 'package:tell_am/models/cart_manager.dart';
+import 'package:tell_am/components/custom_appbar.dart';
+import 'package:tell_am/screens/customer/food_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -69,15 +69,13 @@ class HomeScreenState extends State<HomeScreen> {
   ];
   final List<Map<String, dynamic>> _featuredItems = [
     {
-      'image': 'assets/images/Jollof rice and Plantain.jpg',
+      'image': 'assets/images/Jollof Rice.jpg',
       'name': 'Jollof Rice & Chicken',
       'restaurant': 'Mama\'s Kitchen',
       'rating': 4.8,
       'price': 2500,
       'currency': '₦',
-      'prepTime' : 20,
       'isFavorite': true,
-      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
     {
       'image': 'assets/images/Egusi Soup.jpg',
@@ -87,8 +85,6 @@ class HomeScreenState extends State<HomeScreen> {
       'price': 3200,
       'currency': '₦',
       'isFavorite': false,
-      'prepTime' : 20,
-      'description': 'Enjoy delicious Egusi soup and nice pounded yam at Traditional Tastes'
     },
     {
       'image': 'assets/images/Pancakes.jpg',
@@ -98,8 +94,6 @@ class HomeScreenState extends State<HomeScreen> {
       'price': 2800,
       'currency': '₦',
       'isFavorite': true,
-      'prepTime' : 20,
-      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
     {
       'image': 'assets/images/jollof rice and Plantain.jpg',
@@ -109,20 +103,20 @@ class HomeScreenState extends State<HomeScreen> {
       'price': 3000,
       'currency': '₦',
       'isFavorite': false,
-      'prepTime' : 20,
-      'description': 'Enjoy true Nigerian Jollof at Mama\'s Kitchen'
     },
   ];
 
   final List<Map<String, dynamic>> _popularBukas = [
     {
+      'id': 'buka1',
       'image': 'assets/images/Beans Porridge.jpg',
-      'name': 'Mama\'s Kitchen',
+      'name': "Mama's Kitchen",
       'rating': 4.8,
       'deliveryTime': '25-35',
       'distance': 1.2,
     },
     {
+      'id': 'buka2',
       'image': 'assets/images/Vegetable soup and Fufu.jpg',
       'name': 'Traditional Tastes',
       'rating': 4.6,
@@ -130,11 +124,44 @@ class HomeScreenState extends State<HomeScreen> {
       'distance': 2.1,
     },
     {
+      'id': 'buka3',
       'image': 'assets/images/Pancakes.jpg',
       'name': 'Northern Delights',
       'rating': 4.7,
       'deliveryTime': '20-30',
       'distance': 0.8,
+    },
+    {
+      'id': 'buka4',
+      'image': 'assets/images/Beans Porridge.jpg',
+      'name': 'Mama Nkechi',
+      'rating': 4.5,
+      'deliveryTime': '15-25',
+      'distance': 1.5,
+    },
+    {
+      'id': 'buka5',
+      'image': 'assets/images/Salad.jpg',
+      'name': "Healty Eats",
+      'rating': 4.9,
+      'deliveryTime': '25-35',
+      'distance': 1.2,
+    },
+    {
+      'id': 'buka6',
+      'image': 'assets/images/Vegetable soup and Fufu.jpg',
+      'name': 'Sweet Treats',
+      'rating': 4.4,
+      'deliveryTime': '35-45',
+      'distance': 2.5,
+    },
+    {
+      'id': 'buka7',
+      'image': 'assets/images/Pancakes.jpg',
+      'name': "Betty's Breakfast",
+      'rating': 4.2,
+      'deliveryTime': '20-30',
+      'distance': 1.5,
     },
   ];
 
@@ -175,25 +202,19 @@ class HomeScreenState extends State<HomeScreen> {
     if (query.trim().isNotEmpty) {
       // Navigator.pushNamed(context, '/search', arguments: {'query': query});
     }
-    Navigator.pushNamed(
-      context,
-      '/menu',
-      arguments: {'categoryId': categoryId},
-    );
+    // If you want to navigate to menu with a category, pass the categoryId as a parameter to this function.
+    // Example: _navigateToSearch(query, categoryId);
   }
 
   void _navigateToBuka(Map<String, dynamic> buka) {
     // Navigate to restaurant/buka detail
-    // Navigator.pushNamed(context, '/buka-detail', arguments: {'bukaId': buka['id']});
+    Navigator.pushNamed(context, '/buka-detail',
+        arguments: {'bukaId': buka['id']});
   }
 
   void _navigateToFoodDetail(Map<String, dynamic> food) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FoodDetailScreen(food: food),
-      ),
-    );
+    // Navigate to food detail
+    // Navigator.pushNamed(context, '/food-detail', arguments: {'foodId': food['id']});
   }
 
   void _toggleFavorite(int index) {
@@ -231,19 +252,23 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () {},
+      appBar: HomeAppBar(
+          // title: const Text('Home'),
+          // actions: [
+          //   IconButton(
+          //     icon: const Icon(Icons.shopping_cart_outlined),
+          //     onPressed: () {
+          //       Navigator.pushNamed(context, '/cart');
+          //     },
+          //   ),
+          //   IconButton(
+          //     icon: const Icon(Icons.notifications_outlined),
+          //     onPressed: () {
+          //       Navigator.pushNamed(context, '/notif');
+          //     },
+          //   )
+          // ],
           ),
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-          )
-        ],
-      ),
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
@@ -305,7 +330,7 @@ class HomeScreenState extends State<HomeScreen> {
                               shape: BoxShape.circle,
                               color: _currentBannerIndex == index
                                   ? Colors.orange
-                                  : Colors.orange.withOpacity(0.3),
+                                  : Colors.orange.withValues(alpha: 0.3),
                             ),
                           )),
                 ),
@@ -394,7 +419,7 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigate to all restaurants
+                          Navigator.pushNamed(context, '/all_buka');
                         },
                         child: const Text(
                           'See All',
@@ -419,10 +444,6 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-<<<<<<< Updated upstream
-      ),
-      bottomNavigationBar: const BottomNavbar(),
-=======
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.orange,
@@ -467,7 +488,6 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
->>>>>>> Stashed changes
     );
   }
 
@@ -498,7 +518,7 @@ class HomeScreenState extends State<HomeScreen> {
                 Text(
                   'johndoe@example.com',
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 14,
                   ),
                 ),
@@ -598,7 +618,7 @@ class HomeScreenState extends State<HomeScreen> {
             image: AssetImage(banner['image']),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.3),
+              Colors.black.withValues(alpha: 0.3),
               BlendMode.darken,
             ),
             onError: (error, stackTrace) {
@@ -660,7 +680,7 @@ class HomeScreenState extends State<HomeScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: Colors.orange.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -686,16 +706,14 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _navigateToCategory(int categoryId) {
+    // Navigate to menu or category page with the selected categoryId
+    // Example: Navigator.pushNamed(context, '/menu', arguments: {'categoryId': categoryId});
+  }
+
   Widget _buildFeaturedItem(Map<String, dynamic> food, int index) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FoodDetailScreen(food: food),
-          ),
-        );
-      },
+      onTap: () => _navigateToFoodDetail(food),
       child: Container(
         width: 180,
         margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -704,7 +722,7 @@ class HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),
@@ -845,7 +863,7 @@ class HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withValues(alpha: 0.2),
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),

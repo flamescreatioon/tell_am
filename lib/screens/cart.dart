@@ -80,7 +80,7 @@ class CartState extends State<Cart> {
               color: Colors.grey[700],
             )),
         const SizedBox(height: 10),
-        Text('Add items to get started',
+        const Text('Add items to get started',
             style: TextStyle(fontSize: 16, color: Colors.grey)),
         const SizedBox(height: 30),
         ElevatedButton(

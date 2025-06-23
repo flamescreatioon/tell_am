@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tell_am/screens/home_screen.dart';
 import 'package:tell_am/screens/register_screen.dart';
-import 'package:tell_am/components/button_01.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,12 +16,12 @@ class LoginScreenState extends State<LoginScreen> {
         body: SafeArea(
             child: Center(
                 child: Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Center(
+                        const Center(
                           child: Icon(
                             Icons.lock,
                             size: 100,
@@ -30,7 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const SizedBox(height: 24.0),
-                        Text(
+                        const Text(
                           'Welcome Back',
                           style: TextStyle(
                             fontSize: 32,
@@ -40,7 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8.0),
-                        Text(
+                        const Text(
                           'Please login to your account',
                           style: TextStyle(
                             fontSize: 14,
@@ -57,11 +56,11 @@ class LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                   labelText: 'Email',
                                   hintText: 'Enter your email',
-                                  prefixIcon: Icon(Icons.email),
+                                  prefixIcon: const Icon(Icons.email),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                     vertical: 16.0,
                                     horizontal: 16.0,
                                   )),
@@ -72,11 +71,11 @@ class LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 labelText: 'Password',
                                 hintText: 'Enter your password',
-                                prefixIcon: Icon(Icons.lock),
+                                prefixIcon: const Icon(Icons.lock),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                contentPadding: EdgeInsets.symmetric(
+                                contentPadding: const EdgeInsets.symmetric(
                                   vertical: 16.0,
                                   horizontal: 16.0,
                                 ),
@@ -93,7 +92,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 const Text('Remember me'),
                                 TextButton(
                                   onPressed: () {},
-                                  child: Text(
+                                  child: const Text(
                                     'Forgot Password?',
                                     style: TextStyle(
                                       color: Colors.orange,
@@ -109,7 +108,7 @@ class LoginScreenState extends State<LoginScreen> {
                               onPressed: () => (
                                 Navigator.push(
                                   context, 
-                                  MaterialPageRoute(builder: (context) => HomeScreen())
+                                  MaterialPageRoute(builder: (context) =>  HomeScreen())
                                 )
                               ),
                               style: ElevatedButton.styleFrom(

@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
-import 'screens/login_screen.dart';
-import 'screens/register_screen.dart';
-import 'screens/profile.dart';
-import 'screens/home_screen.dart';
-import 'screens/food_detail.dart';
+import 'package:get/get.dart';
+import 'package:tell_am/screens/newscreen.dart';
+import 'package:tell_am/widget/popular_food_page.dart';
+
 void main() {
   runApp(
     DevicePreview(
@@ -21,13 +20,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       // ignore: deprecated_member_use
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(), // Your app's home screen
+      home: PopularFoodPage(), // Your app's home screen
     );
   }
 }

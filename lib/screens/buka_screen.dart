@@ -1,196 +1,195 @@
 import 'package:flutter/material.dart';
 import 'package:tell_am/components/bottom_navbar.dart';
 
-class BukaScreen extends StatefulWidget {
-  // Renamed class
-  const BukaScreen({Key? key}) : super(key: key);
+class BukaDetailsScreen extends StatefulWidget {
+  final String bukaId;
+
+  const BukaDetailsScreen({
+    super.key,
+    required this.bukaId,
+  });
 
   @override
-  BukaScreenState createState() => BukaScreenState(); // Renamed state
+  BukaDetailsScreenState createState() => BukaDetailsScreenState();
 }
 
-class BukaScreenState extends State<BukaScreen> {
-  // Renamed state class
+class BukaDetailsScreenState extends State<BukaDetailsScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
+  bool _isFavorite = false;
+  bool _isLoading = true;
+  Map<String, dynamic>? _bukaData;
 
-  // Sample vendor data - Replace with your actual data source
-  final List<Map<String, dynamic>> _vendors = [
-    {
-      'image': 'assets/images/Beans Porridge.jpg',
+  final Map<String, Map<String, dynamic>> _bukasData = {
+    'buka1': {
+      'id': 'buka1',
       'name': "Mama's Kitchen",
+      'image': 'assets/images/Beans Porridge.jpg',
       'rating': 4.8,
       'deliveryTime': '25-35',
       'distance': 1.2,
-      'categories': ['Local Dishes', 'Soups', 'Rice'],
       'isOpen': true,
-      'minimumOrder': 2000,
-      'deliveryFee': 500,
     },
-    {
-      'image': 'assets/images/Vegetable soup and Fufu.jpg',
+    'buka2': {
+      'id': 'buka2',
       'name': 'Traditional Tastes',
+      'image': 'assets/images/Vegetable soup and Fufu.jpg',
       'rating': 4.6,
       'deliveryTime': '30-40',
       'distance': 2.1,
-      'categories': ['Swallow', 'Soups', 'Local Dishes'],
       'isOpen': true,
-      'minimumOrder': 1500,
-      'deliveryFee': 600,
     },
-    {
-      'image': 'assets/images/Pancakes.jpg',
+    'buka3': {
+      'id': 'buka3',
       'name': 'Northern Delights',
+      'image': 'assets/images/Pancakes.jpg',
       'rating': 4.7,
       'deliveryTime': '20-30',
       'distance': 0.8,
-      'categories': ['Breakfast', 'Local Dishes'],
       'isOpen': false,
-      'minimumOrder': 1800,
-      'deliveryFee': 400,
     },
+  };
+
+  final List<Map<String, dynamic>> _menuCategories = [
+    {'name': 'Popular', 'id': 'popular'},
+    {'name': 'Local Dishes', 'id': 'local'},
+    {'name': 'Soups', 'id': 'soups'},
+    {'name': 'Swallow', 'id': 'swallow'},
+    {'name': 'Rice', 'id': 'rice'},
+    {'name': 'Drinks', 'id': 'drinks'},
   ];
+
+  final Map<String, List<Map<String, dynamic>>> _bukaMenuItems = {
+    'buka1': [
+      {
+        'id': 'item1',
+        'name': 'Jollof Rice & Chicken',
+        'description': 'Spicy rice cooked in tomato sauce with grilled chicken',
+        'price': 2500,
+        'image': 'assets/images/Jollof Rice.jpg',
+        'category': 'rice',
+        'isPopular': true,
+        'rating': 4.8,
+        'numReviews': 245,
+      },
+      {
+        'id': 'item2',
+        'name': 'Egusi Soup & Pounded Yam',
+        'description': 'Ground melon seeds cooked with vegetables and meat',
+        'price': 3000,
+        'image': 'assets/images/Egusi soup.jpg',
+        'category': 'soups',
+        'isPopular': true,
+        'rating': 4.7,
+        'numReviews': 189,
+      },
+    ],
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _menuCategories.length, vsync: this);
+    _loadBukaData();
+  }
+
+  Future<void> _loadBukaData() async {
+    setState(() => _isLoading = true);
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      final bukaData = _bukasData[widget.bukaId];
+      if (bukaData == null) throw Exception('Buka not found');
+      setState(() {
+        _bukaData = bukaData;
+        _isLoading = false;
+      });
+    } catch (_) {
+      setState(() => _isLoading = false);
+      _showError('Failed to load buka details');
+    }
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.red),
+    );
+  }
 
   @override
   void dispose() {
+    _tabController.dispose();
     _searchController.dispose();
     super.dispose();
   }
 
-  void _navigateToVendorDetail(Map<String, dynamic> vendor) {
-    // Navigate to vendor detail screen
-    // Navigator.pushNamed(context, '/vendor-detail', arguments: vendor);
-  }
-
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.orange)),
+        ),
+      );
+    }
+    if (_bukaData == null) {
+      return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => Navigator.pop(context)),
+        ),
+        body: const Center(child: Text('Buka not found')),
+      );
+    }
+
+    final filteredMenuItems = (_bukaMenuItems[widget.bukaId] ?? []).where((item) {
+      final query = _searchController.text.toLowerCase();
+      return item['name'].toLowerCase().contains(query);
+    }).toList();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Popular Bukas'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined),
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart');
-            },
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Search Bar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search vendors...',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.filter_list),
-                    onPressed: () {
-                      // Show filter options
-                    },
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
-                ),
-              ),
-            ),
-
-            // Vendor List
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: _vendors.length,
-                itemBuilder: (context, index) {
-                  return _buildVendorCard(_vendors[index]);
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const BottomNavbar(),
-    );
-  }
-
-  Widget _buildVendorCard(Map<String, dynamic> vendor) {
-    return GestureDetector(
-      onTap: () => _navigateToVendorDetail(vendor),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Vendor Image
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(16),
-                  ),
-                  child: Image.asset(
-                    vendor['image'],
-                    height: 150,
-                    width: double.infinity,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 200,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    _bukaData!['image'],
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        height: 150,
-                        color: Colors.grey[300],
-                        child: const Icon(
-                          Icons.restaurant,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
-                      );
-                    },
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: Colors.grey[300],
+                      child: const Icon(Icons.restaurant, size: 50, color: Colors.grey),
+                    ),
                   ),
-                ),
-                Positioned(
-                  top: 12,
-                  right: 12,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
+                  Container(
                     decoration: BoxDecoration(
-                      color: vendor['isOpen'] ? Colors.green : Colors.red,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      vendor['isOpen'] ? 'Open' : 'Closed',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-
-            // Vendor Details
-            Padding(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border, color: _isFavorite ? Colors.red : Colors.white),
+                onPressed: () => setState(() => _isFavorite = !_isFavorite),
+              ),
+              IconButton(icon: const Icon(Icons.share_outlined), onPressed: () {}),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,123 +198,152 @@ class BukaScreenState extends State<BukaScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: Text(
-                          vendor['name'],
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            vendor['rating'].toString(),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _bukaData!['name'],
+                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 4),
+                            Row(
+                              children: [
+                                const Icon(Icons.star, color: Colors.amber, size: 20),
+                                const SizedBox(width: 4),
+                                Text(_bukaData!['rating'].toString(), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                const SizedBox(width: 16),
+                                Text('${_bukaData!['deliveryTime']} min', style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+                                const SizedBox(width: 16),
+                                Text('${_bukaData!['distance']} km', style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: _bukaData!['isOpen'] ? Colors.green : Colors.red,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(_bukaData!['isOpen'] ? 'Open' : 'Closed', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
-
-                  // Categories
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: (vendor['categories'] as List<String>)
-                        .map((category) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.orange.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                category,
-                                style: const TextStyle(
-                                  color: Colors.orange,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ))
-                        .toList(),
+                  const SizedBox(height: 16),
+                  TextField(
+                    controller: _searchController,
+                    onChanged: (_) => setState(() {}),
+                    decoration: InputDecoration(
+                      hintText: 'Search menu items...',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                    ),
                   ),
-                  const SizedBox(height: 12),
+                ],
+              ),
+            ),
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _SliverAppBarDelegate(
+              TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                labelColor: Colors.orange,
+                unselectedLabelColor: Colors.grey,
+                indicatorColor: Colors.orange,
+                tabs: _menuCategories.map((c) => Tab(text: c['name'])).toList(),
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => _buildMenuItem(filteredMenuItems[index]),
+                childCount: filteredMenuItems.length,
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: const BottomNavbar(),
+    );
+  }
 
-                  // Delivery Info
+  Widget _buildMenuItem(Map<String, dynamic> item) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 5, offset: const Offset(0, 2)),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.horizontal(left: Radius.circular(12)),
+            child: Image.asset(
+              item['image'],
+              width: 120,
+              height: 120,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Container(
+                width: 120,
+                height: 120,
+                color: Colors.grey[300],
+                child: const Icon(Icons.restaurant, size: 40, color: Colors.grey),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(item['name'], style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
+                  Text(item['description'], style: const TextStyle(color: Colors.grey)),
+                  const SizedBox(height: 8),
+                  Text('₦${item['price']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.access_time,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
+                      const Icon(Icons.star, size: 16, color: Colors.amber),
                       const SizedBox(width: 4),
-                      Text(
-                        '${vendor['deliveryTime']} min',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      const Icon(
-                        Icons.location_on,
-                        size: 16,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        '${vendor['distance']} km',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-
-                  // Order Info
-                  Row(
-                    children: [
-                      Text(
-                        'Min. Order: ₦${vendor['minimumOrder']}',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        'Delivery: ₦${vendor['deliveryFee']}',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 14,
-                        ),
-                      ),
+                      Text('${item['rating']} (${item['numReviews']} reviews)', style: const TextStyle(fontSize: 12, color: Colors.grey)),
                     ],
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final TabBar _tabBar;
+  _SliverAppBarDelegate(this._tabBar);
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => Container(color: Colors.white, child: _tabBar);
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) => false;
 }
