@@ -12,6 +12,7 @@ import 'screens/profile/notification_screen.dart';
 import 'screens/customer/food_detail_screen.dart';
 import 'components/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'screens/customer/order_history_screen.dart';
 
 void main() {
   runApp(
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
               cartItems: [],
             ),
         '/notif': (context) => const NotificationScreen(),
+        '/orders-history': (context) => const OrderHistoryScreen(),
       },
 
       // Dynamic routes for screens that need parameters

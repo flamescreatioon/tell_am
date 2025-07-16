@@ -59,7 +59,7 @@ class RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  'assets/Logo/1.svg',
+                  'assets/Logo/Logo_lightmode.svg',
                   semanticsLabel: 'TellAm Logo',
                   fit: BoxFit.cover,
                   height: 100,
