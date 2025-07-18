@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tell_am/components/bottom_navbar.dart';
 
+<<<<<<< HEAD:lib/screens/buka_screen.dart
 class BukaDetailsScreen extends StatefulWidget {
   final String bukaId;
 
@@ -8,6 +9,11 @@ class BukaDetailsScreen extends StatefulWidget {
     super.key,
     required this.bukaId,
   });
+=======
+class BukaScreen extends StatefulWidget {
+  // Renamed class
+  const BukaScreen({super.key});
+>>>>>>> 820007614d27b2a0434e3013afe3e4e724cf6f7d:lib/screens/customer/buka_screen.dart
 
   @override
   BukaDetailsScreenState createState() => BukaDetailsScreenState();
@@ -49,6 +55,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
       'distance': 0.8,
       'isOpen': false,
     },
+<<<<<<< HEAD:lib/screens/buka_screen.dart
   };
 
   final List<Map<String, dynamic>> _menuCategories = [
@@ -58,6 +65,52 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
     {'name': 'Swallow', 'id': 'swallow'},
     {'name': 'Rice', 'id': 'rice'},
     {'name': 'Drinks', 'id': 'drinks'},
+=======
+    {
+      'image': 'assets/images/Beans Porridge.jpg',
+      'name': 'Mama Nkechi',
+      'rating': 4.5,
+      'deliveryTime': '15-25',
+      'distance': 1.5,
+      'categories': ['Beans', 'Local Dishes'],
+      'isOpen': true,
+      'minimumOrder': 1000,
+      'deliveryFee': 300,
+    },
+    {
+      'image': 'assets/images/Salad.jpg',
+      'name': 'Healthy Eats',
+      'rating': 4.9,
+      'deliveryTime': '25-35',
+      'distance': 1.2,
+      'categories': ['Salads', 'Healthy Meals'],
+      'isOpen': true,
+      'minimumOrder': 2500,
+      'deliveryFee': 800,
+    },
+    {
+      'image': 'assets/images/Cake.jpg',
+      'name': 'Sweet Treats',
+      'rating': 4.4,
+      'deliveryTime': '35-45',
+      'distance': 2.5,
+      'categories': ['Desserts', 'Cakes'],
+      'isOpen': false,
+      'minimumOrder': 3000,
+      'deliveryFee': 900,
+    },
+    {
+      'image': 'assets/images/Pancakes.jpg',
+      'name': "Betty's Breakfast",
+      'rating': 4.2,
+      'deliveryTime': '20-30',
+      'distance': 1.5,
+      'categories': ['Pancakes', 'Breakfast', 'Light Meal'],
+      'isOpen': true,
+      'minimumOrder': 1200,
+      'deliveryFee': 700,
+    },
+>>>>>>> 820007614d27b2a0434e3013afe3e4e724cf6f7d:lib/screens/customer/buka_screen.dart
   ];
 
   final Map<String, List<Map<String, dynamic>>> _bukaMenuItems = {
@@ -147,6 +200,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
     }).toList();
 
     return Scaffold(
+<<<<<<< HEAD:lib/screens/buka_screen.dart
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -158,6 +212,94 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
                 children: [
                   Image.asset(
                     _bukaData!['image'],
+=======
+      appBar: AppBar(
+        title: const Text('Popular Bukas'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart_outlined),
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Search Bar
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search vendors...',
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.filter_list),
+                    onPressed: () {
+                      // Show filter options
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                ),
+              ),
+            ),
+
+            // Vendor List
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _vendors.length,
+                itemBuilder: (context, index) {
+                  return _buildVendorCard(_vendors[index]);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: const BottomNavbar(),
+    );
+  }
+
+  Widget _buildVendorCard(Map<String, dynamic> vendor) {
+    return GestureDetector(
+      onTap: () => _navigateToVendorDetail(vendor),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withValues(alpha: 0.2),
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Vendor Image
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                  child: Image.asset(
+                    vendor['image'],
+                    height: 150,
+                    width: double.infinity,
+>>>>>>> 820007614d27b2a0434e3013afe3e4e724cf6f7d:lib/screens/customer/buka_screen.dart
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => Container(
                       color: Colors.grey[300],
@@ -230,6 +372,7 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
                       ),
                     ],
                   ),
+<<<<<<< HEAD:lib/screens/buka_screen.dart
                   const SizedBox(height: 16),
                   TextField(
                     controller: _searchController,
@@ -244,6 +387,33 @@ class BukaDetailsScreenState extends State<BukaDetailsScreen>
                       filled: true,
                       fillColor: Colors.grey[200],
                     ),
+=======
+                  const SizedBox(height: 8),
+
+                  // Categories
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: (vendor['categories'] as List<String>)
+                        .map((category) => Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.orange.withValues(alpha: 0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                category,
+                                style: const TextStyle(
+                                  color: Colors.orange,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+>>>>>>> 820007614d27b2a0434e3013afe3e4e724cf6f7d:lib/screens/customer/buka_screen.dart
                   ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tell_am/components/custom_appbar.dart';
 
 class Cart extends StatefulWidget {
   final List<Map<String, dynamic>> cartItems;
@@ -25,29 +26,30 @@ class CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('My Cart'),
-        actions: [
-          TextButton(
-            child: Text(
-              isEditing ? 'Done' : 'Edit',
-              style: const TextStyle(color: Colors.white),
-            ),
-            onPressed: () {
-              setState(() {
-                isEditing = !isEditing;
-              });
-            },
+      appBar: const CartAppBar(
+          // title: const Text('My Cart'),
+          // actions: [
+          //   TextButton(
+          //     child: Text(
+          //       isEditing ? 'Done' : 'Edit',
+          //       style: const TextStyle(color: Colors.white),
+          //     ),
+          //     onPressed: () {
+          //       setState(() {
+          //         isEditing = !isEditing;
+          //       });
+          //     },
+          //   ),
+          // ],
           ),
-        ],
-      ),
       body: widget.cartItems.isEmpty
           ? buildEmptyCart()
           : Column(
               children: [
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     itemCount: widget.cartItems.length,
                     itemBuilder: (context, index) {
                       final item = widget.cartItems[index];
@@ -133,7 +135,7 @@ class CartState extends State<Cart> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -167,55 +169,57 @@ class CartState extends State<Cart> {
           ),
           const SizedBox(width: 12),
           Expanded(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                item['name'],
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 4),
-              if (item['extras'].isNotEmpty)
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text(
-                  'Extras: ${item['extras'].join(", ")}',
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 14,
+                  item['name'],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
-              const SizedBox(height: 4),
-              Text(
-                '₦${item['price']}',
-                style: const TextStyle(
-                  color: Colors.orange,
-                  fontSize: 16, 
-                  fontWeight: FontWeight.bold,
+                const SizedBox(height: 4),
+                if (item['extras'].isNotEmpty)
+                  Text(
+                    'Extras: ${item['extras'].join(", ")}',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                    ),
+                  ),
+                const SizedBox(height: 4),
+                Text(
+                  '₦${item['price']}',
+                  style: const TextStyle(
+                    color: Colors.orange,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
             ),
           ),
-
-          isEditing ? _buildEditQuantityControls(item) : Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              'x${item['quantity']}',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              )
-            ),
-          )
+          isEditing
+              ? _buildEditQuantityControls(item)
+              : Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text('x${item['quantity']}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      )),
+                )
         ],
       ),
     );
   }
+
   Widget _buildEditQuantityControls(Map<String, dynamic> item) {
     return Column(
       children: [
@@ -234,7 +238,8 @@ class CartState extends State<Cart> {
                       item['quantity']--;
                     } else {
                       // Remove the item if quantity reaches 0
-                      widget.cartItems.removeWhere((element) => element['id'] == item['id']);
+                      widget.cartItems.removeWhere(
+                          (element) => element['id'] == item['id']);
                     }
                   });
                 },
@@ -264,7 +269,8 @@ class CartState extends State<Cart> {
         GestureDetector(
           onTap: () {
             setState(() {
-              widget.cartItems.removeWhere((element) => element['id'] == item['id']);
+              widget.cartItems
+                  .removeWhere((element) => element['id'] == item['id']);
             });
           },
           child: Container(
@@ -294,7 +300,8 @@ class CartState extends State<Cart> {
     );
   }
 
-  Widget _buildQuantityButton({required IconData icon, required Function() onTap}) {
+  Widget _buildQuantityButton(
+      {required IconData icon, required Function() onTap}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -319,7 +326,7 @@ class CartState extends State<Cart> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 10,
             offset: const Offset(0, -2),
@@ -422,4 +429,3 @@ class CartState extends State<Cart> {
     );
   }
 }
-

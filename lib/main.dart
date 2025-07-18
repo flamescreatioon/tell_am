@@ -9,10 +9,9 @@ void main() {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
-      builder: (context) => const MyApp(), // Wrap your app
+      builder: (context) => const MyApp(),
     ),
   );
-  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,13 +19,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       // ignore: deprecated_member_use
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      debugShowCheckedModeBanner: false,
-      home: PopularFoodPage(), // Your app's home screen
+      themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false, // Your app's home screen
     );
   }
 }

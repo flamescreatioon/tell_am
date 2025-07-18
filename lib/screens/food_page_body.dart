@@ -113,8 +113,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   children: [
                     //Image section
                     Container(
-                      width: 120,
-                      height: 120,
+                      width: Diementions.listViewImgSize,
+                      height: Diementions.listViewImgSize,
                       margin: EdgeInsets.only(bottom: Diementions.height10, left: Diementions.width20),
                       decoration: BoxDecoration(
                         color: AppColors.mainWhiteColor,
@@ -128,7 +128,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     // Text section
                     Expanded(
                       child: Container(
-                        height: 100,
+                        height: Diementions.listViewTextContSize,
                         decoration: BoxDecoration(
                           color: AppColors.mainWhiteColor,
                           borderRadius: BorderRadius.only(

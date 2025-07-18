@@ -96,7 +96,7 @@ class HomeScreenState extends State<HomeScreen> {
       'isFavorite': true,
     },
     {
-      'image': 'assets/images/jollof rice and Plantain.jpg',
+      'image': 'assets/images/Jollof Rice and Plantain.jpg',
       'name': 'Plantain & Fish Pepper Soup',
       'restaurant': 'Coastal Flavors',
       'rating': 4.5,
