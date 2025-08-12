@@ -396,7 +396,7 @@ class HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 272,
                   child: ListView.builder(
-                    scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     itemCount: _featuredItems.length,
                     itemBuilder: (context, index) {

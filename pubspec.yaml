@@ -33,6 +33,8 @@ dependencies:
     sdk: flutter
   device_preview: ^1.2.0
   image_picker: ^0.8.7+5
+  dots_indicator: ^4.0.1
+  get: ^4.7.2
   google_fonts: ^6.2.1
   http: ^1.4.0
   dropdown_button2: ^2.3.9
@@ -43,7 +45,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-
+  cupertino_icons: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -69,26 +71,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
-    - assets/images//Afang soup.jpg
-    - assets/images/Akara and Pap.jpg
-    - assets/images/Amala and Ewedu.jpg
-    - assets/images/Beans Porridge.jpg
-    - assets/images/Coconut Rice.jpg
-    - assets/images/Egusi Soup.jpg
-    - assets/images/Indomie and Egg.jpg
-    - assets/images/Jollof Rice and Plantain.jpg
-    - assets/images/Moi Moi.jpg
-    - assets/images/Nsala(White) Soup.jpg
-    - assets/images/Ofada Rice with Sauce.jpg
-    - assets/images/Pancakes.jpg
-    - assets/images/Puff puff.jpg
-    - assets/images/Rice and Stew.png
-    - assets/images/Stewed Beans.jpg
-    - assets/images/Vegetable soup and Fufu.jpg
-    - assets/images/Yam and Egg Sauce.jpg
-    - assets/images/Cake.jpg
-    - assets/images/Salad.jpg
+    - assets/images/food/
     - assets/Logo/
     - assets/data/
  
