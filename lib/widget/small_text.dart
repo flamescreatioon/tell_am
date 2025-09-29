@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tell_am/utils/dimentions.dart';
+import 'package:tell_am/utils/dimensions.dart';
 
 class SmallText extends StatelessWidget {
   Color color;
@@ -22,7 +22,7 @@ class SmallText extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'Roboto',
         color: color,
-        fontSize: size == 0 ? Dimentions.font16 : size,
+        fontSize: size == 0 ? Dimensions.font16 : size,
         fontWeight: FontWeight.w400,
         height: height, // Adjusts the line height
       ),

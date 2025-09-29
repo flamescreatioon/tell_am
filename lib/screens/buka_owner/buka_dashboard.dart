@@ -106,7 +106,7 @@ class BukaDashboardState extends State<BukaDashboard>
         'name': 'Jollof Rice & Chicken',
         'description': 'Spicy rice cooked in tomato sauce with grilled chicken',
         'price': 2500,
-        'image': 'assets/images/Jollof Rice.jpg',
+        'image': 'assets/images/Jollof rice and Plantain.jpg',
         'category': 'rice',
         'isPopular': true,
         'rating': 4.8,

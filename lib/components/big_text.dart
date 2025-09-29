@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tell_am/utils/dimentions.dart';
+import 'package:tell_am/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
-  Color color;
+  final Color color;
   final String text;
-  double size;
-  TextOverflow overflow;
+  final double size;
+  final TextOverflow overflow;
 
   BigText({
     Key? key,
@@ -24,7 +24,7 @@ class BigText extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'Roboto',
         color: color,
-        fontSize: size == 0 ? Dimentions.font20 : size,
+        fontSize: size == 0 ? Dimensions.font20 : size,
         fontWeight: FontWeight.w400,
       ),
     );

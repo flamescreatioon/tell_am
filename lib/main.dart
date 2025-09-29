@@ -13,6 +13,7 @@ import 'screens/customer/food_detail_screen.dart';
 import 'components/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/customer/order_history_screen.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       // useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,

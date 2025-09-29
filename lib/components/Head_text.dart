@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tell_am/utils/dimentions.dart';
+import 'package:tell_am/utils/dimensions.dart';
 
 class HeadText extends StatelessWidget {
-  Color color;
+  final Color color;
   final String text;
-  double size;
-  TextOverflow overflow;
+  final double size;
+  final TextOverflow overflow;
 
   HeadText({
-    Key? key,
+    super.key,
     this.color = const Color(0xFF332d2b), // Default color
     required this.text,
     this.overflow = TextOverflow.ellipsis,
     this.size = 0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class HeadText extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'Roboto',
         color: color,
-        fontSize: size == 0 ? Dimentions.font30 : size,
+        fontSize: size == 0 ? Dimensions.font30 : size,
         fontWeight: FontWeight.w400,
       ),
     );

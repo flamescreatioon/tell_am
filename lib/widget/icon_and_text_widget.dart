@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tell_am/utils/dimentions.dart';
+import 'package:tell_am/utils/dimensions.dart';
 import 'package:tell_am/widget/small_text.dart';
 
 class IconAndTextWidget extends StatelessWidget {
@@ -25,7 +25,7 @@ class IconAndTextWidget extends StatelessWidget {
         Icon(
           icon,
           color: iconColor,
-          size: Dimentions.iconSize24, // Adjust the size as needed
+          size: Dimensions.iconSize24, // Adjust the size as needed
         ),
         const SizedBox(width: 3), // Add some space between icon and text
         SmallText(

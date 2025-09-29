@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tell_am/components/Head_text.dart';
+import 'package:tell_am/components/head_text.dart';
 import 'package:tell_am/components/big_text.dart';
 import 'package:tell_am/utils/colors.dart';
 import 'package:tell_am/screens/food_page_body.dart';
-import 'package:tell_am/utils/dimentions.dart';
+import 'package:tell_am/utils/dimensions.dart';
 import 'package:tell_am/widget/small_text.dart';
 
 class PopularFoodPage extends StatefulWidget {
@@ -22,9 +22,9 @@ class _PopularFoodPageState extends State<PopularFoodPage> {
           Container(
             child: Container(
               margin: EdgeInsets.only(
-                  top: Dimentions.height45, bottom: Dimentions.height15),
+                  top: Dimensions.height45, bottom: Dimensions.height15),
               padding: EdgeInsets.only(
-                  left: Dimentions.width15, right: Dimentions.width15),
+                  left: Dimensions.width15, right: Dimensions.width15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -49,17 +49,17 @@ class _PopularFoodPageState extends State<PopularFoodPage> {
                   ),
                   Center(
                     child: Container(
-                      width: Dimentions.height45,
-                      height: Dimentions.height45,
+                      width: Dimensions.height45,
+                      height: Dimensions.height45,
                       decoration: BoxDecoration(
                         color: AppColors.mainColor,
                         borderRadius:
-                            BorderRadius.circular(Dimentions.radius15),
+                            BorderRadius.circular(Dimensions.radius15),
                       ),
                       child: Icon(
                         Icons.search,
                         color: AppColors.mainWhiteColor,
-                        size: Dimentions.iconSize24,
+                        size: Dimensions.iconSize24,
                       ),
                     ),
                   )

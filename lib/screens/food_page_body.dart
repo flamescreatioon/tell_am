@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:tell_am/components/big_text.dart';
 import 'package:tell_am/utils/colors.dart';
-import 'package:tell_am/utils/dimentions.dart';
+import 'package:tell_am/utils/dimensions.dart';
 import 'package:tell_am/widget/icon_and_text_widget.dart';
 import 'package:tell_am/widget/small_text.dart';
 
@@ -22,7 +22,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   var _currentPageValue = 0.0; // Current page value for PageView
   double _scaleFactor = 0.8; // Scale factor for the pages
   double _height =
-      Dimentions.pageViewContainer; // Height of the page view container
+      Dimensions.pageViewContainer; // Height of the page view container
 
   @override
   void initState() {
@@ -53,9 +53,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         // Slider section
-        SizedBox(height: Dimentions.height10),
+        SizedBox(height: Dimensions.height10),
         Container(
-          height: Dimentions.pageView,
+          height: Dimensions.pageView,
           child: PageView.builder(
             controller: pageController,
             itemCount: 5, // Number of items in the PageView
@@ -83,29 +83,29 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
 
-        SizedBox(height: Dimentions.height30),
+        SizedBox(height: Dimensions.height30),
         // Popular text section
         Container(
-          margin: EdgeInsets.only(left: Dimentions.width30),
+          margin: EdgeInsets.only(left: Dimensions.width30),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               BigText(
                   text: "Popular Restaurant",
-                  size: Dimentions.font26,
+                  size: Dimensions.font26,
                   color: AppColors.mainBlackColor),
-              SizedBox(width: Dimentions.width10),
+              SizedBox(width: Dimensions.width10),
               Container(
                 margin: EdgeInsets.only(bottom: 3),
                 child: SmallText(
                     text: ".",
                     color: AppColors.mainColor,
-                    size: Dimentions.font26),
+                    size: Dimensions.font26),
               ),
             ],
           ),
         ),
-        SizedBox(height: Dimentions.height10),
+        SizedBox(height: Dimensions.height10),
         // Popular food items section
         Container(
           height: 700,
@@ -114,20 +114,20 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             itemCount: 10,
             itemBuilder: (context, index) {
               return Container(
-                margin: EdgeInsets.only(right: Dimentions.width10),
+                margin: EdgeInsets.only(right: Dimensions.width10),
                 child: Row(
                   children: [
                     //Image section
                     Container(
-                      width: Dimentions.listViewImgSize,
-                      height: Dimentions.listViewImgSize,
+                      width: Dimensions.listViewImgSize,
+                      height: Dimensions.listViewImgSize,
                       margin: EdgeInsets.only(
-                          bottom: Dimentions.height10,
-                          left: Dimentions.width20),
+                          bottom: Dimensions.height10,
+                          left: Dimensions.width20),
                       decoration: BoxDecoration(
                         color: AppColors.mainWhiteColor,
                         borderRadius:
-                            BorderRadius.circular(Dimentions.radius20),
+                            BorderRadius.circular(Dimensions.radius20),
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
@@ -138,19 +138,19 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     // Text section
                     Expanded(
                       child: Container(
-                        height: Dimentions.listViewTextContSize,
+                        height: Dimensions.listViewTextContSize,
                         decoration: BoxDecoration(
                           color: AppColors.mainWhiteColor,
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(Dimentions.radius20),
-                            bottomRight: Radius.circular(Dimentions.radius20),
+                            topRight: Radius.circular(Dimensions.radius20),
+                            bottomRight: Radius.circular(Dimensions.radius20),
                           ),
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(
-                              left: Dimentions.width5,
-                              right: Dimentions.width5,
-                              top: Dimentions.height10),
+                              left: Dimensions.width5,
+                              right: Dimensions.width5,
+                              top: Dimensions.height10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -158,14 +158,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               BigText(
                                 text: "Beans and Plantain Potage",
                               ),
-                              SizedBox(height: Dimentions.height10),
+                              SizedBox(height: Dimensions.height10),
                               Row(
                                 children: [
                                   Icon(
                                     Icons.food_bank_rounded,
                                     color: AppColors.textColor,
                                   ),
-                                  SizedBox(width: Dimentions.width5),
+                                  SizedBox(width: Dimensions.width5),
                                   BigText(
                                     text: "Big Belle Restaurant",
                                     color: AppColors.mainColor,
@@ -173,7 +173,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                 ],
                               ),
                               SizedBox(
-                                height: Dimentions.height15,
+                                height: Dimensions.height15,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -247,9 +247,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Stack(
         children: [
           Container(
-            height: Dimentions.pageViewContainer * 1.2,
+            height: Dimensions.pageViewContainer * 1.2,
             margin: EdgeInsets.only(
-                left: Dimentions.width10, right: Dimentions.width10),
+                left: Dimensions.width10, right: Dimensions.width10),
             decoration: BoxDecoration(
               color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
               image: DecorationImage(
@@ -271,14 +271,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: Dimentions.pageViewTextContainer * 1.2,
+              height: Dimensions.pageViewTextContainer * 1.2,
               margin: EdgeInsets.only(
-                  left: Dimentions.width20,
-                  right: Dimentions.width20,
-                  bottom: Dimentions.height5),
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  bottom: Dimensions.height5),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(Dimentions.radius20),
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
                 boxShadow: [
                   BoxShadow(
                     color: Color(0xFFe8e8e8),
@@ -297,30 +297,30 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Container(
                 padding: EdgeInsets.only(
-                    top: Dimentions.height15,
-                    left: Dimentions.width15,
-                    right: Dimentions.width15),
+                    top: Dimensions.height15,
+                    left: Dimensions.width15,
+                    right: Dimensions.width15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BigText(text: "Afan Soup"),
-                    SizedBox(height: Dimentions.height5),
+                    SizedBox(height: Dimensions.height5),
                     Row(
                       children: [
                         Icon(
                           Icons.shopping_cart_outlined,
                           color: AppColors.textColor,
-                          size: Dimentions.font14,
+                          size: Dimensions.font14,
                         ),
-                        SizedBox(width: Dimentions.width10),
+                        SizedBox(width: Dimensions.width10),
                         SmallText(
                           text: "Mama Gracy",
                           color: AppColors.mainColor,
-                          size: Dimentions.font14,
+                          size: Dimensions.font14,
                         ),
                       ],
                     ),
-                    SizedBox(height: Dimentions.height10),
+                    SizedBox(height: Dimensions.height10),
                     Row(
                       children: [
                         Wrap(
@@ -332,21 +332,21 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         SizedBox(width: 10),
                         SmallText(
                           text: "4.5",
-                          size: Dimentions.font10,
+                          size: Dimensions.font10,
                         ),
                         SizedBox(width: 10),
                         SmallText(
                           text: "1287",
-                          size: Dimentions.font10,
+                          size: Dimensions.font10,
                         ),
                         SizedBox(width: 10),
                         SmallText(
                           text: "Comments",
-                          size: Dimentions.font10,
+                          size: Dimensions.font10,
                         ),
                       ],
                     ),
-                    SizedBox(height: Dimentions.height20),
+                    SizedBox(height: Dimensions.height20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

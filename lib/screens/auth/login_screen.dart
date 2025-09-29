@@ -4,6 +4,8 @@ import 'package:tell_am/screens/customer/home_screen.dart';
 import 'package:tell_am/screens/auth/register_screen.dart';
 import 'package:tell_am/components/button_01.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tell_am/utils/dimensions.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,12 +31,12 @@ class LoginScreenState extends State<LoginScreen> {
                   SvgPicture.asset(
                     'assets/Logo/Logo_lightmode.svg',
                     semanticsLabel: 'TellAm Logo',
-                    height: 100,
+                    height: Dimensions.height45,
                     fit: BoxFit.cover,
                   ),
                   // const Image(
                   //     image: AssetImage('assets/Logo/TellAm (Light)16x9.png')),
-                  const SizedBox(height: 4.0),
+                  SizedBox(height: Dimensions.height5),
                   // const Center(
                   //   child: Icon(
                   //     Icons.lock,
@@ -42,23 +44,24 @@ class LoginScreenState extends State<LoginScreen> {
                   //     color: Color.fromARGB(255, 255, 145, 77),
                   //   ),
                   // ),
-                  const SizedBox(height: 24.0),
-                  const Text(
+                  SizedBox(height: Dimensions.height25),
+                  Text(
                     'Welcome Back',
                     style: TextStyle(
-                      fontSize: 26,
+                      fontSize: Dimensions.font26,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8.0),
-                  const Text(
+                  SizedBox(height: Dimensions.height10),
+                  Text(
                     'Please login to your account',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    style: TextStyle(
+                        fontSize: Dimensions.font14, color: Colors.grey),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 24.0),
+                  SizedBox(height: Dimensions.height25),
                   Form(
                     child: Column(
                       children: [
@@ -69,7 +72,8 @@ class LoginScreenState extends State<LoginScreen> {
                             hintText: 'Enter your email or phone number',
                             prefixIcon: const Icon(Icons.email),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius10),
                             ),
                             contentPadding: const EdgeInsets.symmetric(
                               vertical: 16.0,
@@ -93,7 +97,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16.0),
+                        SizedBox(height: Dimensions.height15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -124,7 +128,7 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16.0),
+                        SizedBox(height: Dimensions.height15),
                         ElevatedButton(
                           onPressed: () => (Navigator.push(
                             context,
@@ -144,7 +148,7 @@ class LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             'Login',
                             style: GoogleFonts.quicksand(
-                              fontSize: 16,
+                              fontSize: Dimensions.font16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

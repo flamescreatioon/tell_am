@@ -1,22 +1,26 @@
 import 'package:get/get.dart';
 
-class Dimentions {
-  
-  static double screenHeight = Get.context!.height; // Get the height of the screen
+class Dimensions {
+  static double screenHeight =
+      Get.context!.height; // Get the height of the screen
   static double screenWidth = Get.context!.width; // Get the width of the screen
 
   static double pageView = screenHeight / 2.64; // Page view height
-  static double pageViewContainer = screenHeight / 3.84; // Page view container height
+  static double pageViewContainer =
+      screenHeight / 3.84; // Page view container height
   static double pageViewTextContainer = screenHeight / 7.03; // Page view
 
   static double height5 = screenHeight / 168.8; // Height for 5 units
   static double height10 = screenHeight / 84.4; // Height for 10 units
   static double height15 = screenHeight / 56.27; // Height for 15 units
   static double height20 = screenHeight / 42.2; // Height for 20 units
+  static double height25 = screenHeight / 33.76; // Height for 25 units
   static double height30 = screenHeight / 28.13; // Height for 30 units
+  static double height35 = screenHeight / 24.0; // Height for 35 units
+  static double height40 = screenHeight / 21.1; // Height for 40 units
   static double height45 = screenHeight / 18.73; // Height for 45 units
   static double height60 = screenHeight / 14.07; // Height for 60 units
-
+  static double height100 = screenHeight / 1.00; // Height for 100 units
 
   static double font20 = screenHeight / 42.2; // Font size for 20 units
   static double font16 = screenHeight / 52.75; // Font size for 16 units
@@ -36,6 +40,8 @@ class Dimentions {
   static double font45 = screenHeight / 18.73; // Font size for 45 units
   static double font50 = screenHeight / 16.88; // Font size for 50 units
 
+  static double radius8 = screenHeight / 105.5; // Radius for 8 units
+  static double radius10 = screenHeight / 84.4; // Radius for 10
   static double radius20 = screenHeight / 42.2; // Radius for 20 units
   static double radius30 = screenHeight / 28.13; // Radius for 30 units
   static double radius15 = screenHeight / 56.27; // Radius for 15 units
@@ -45,7 +51,7 @@ class Dimentions {
   static double width15 = screenWidth / 56.27; // Width for 15 units
   static double width20 = screenWidth / 42.2; // Width for 20 units
   static double width30 = screenWidth / 28.13; // Width for 30 units
-  static double width35 = screenWidth / 24.0; // Width for 35 units 
+  static double width35 = screenWidth / 24.0; // Width for 35 units
   static double width45 = screenWidth / 18.73; // Width for 45 units
   static double width60 = screenWidth / 14.07; // Width for 60 units
 
